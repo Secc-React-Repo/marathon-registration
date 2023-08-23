@@ -1,25 +1,29 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import Form from "./Form";
+import Welcome from "./Welcome";
+import "./App.css"; // Import CSS for this component
 
-function App() {
+const App = () => {
+  const [userDetails, setUserDetails] = useState(null);
+
+  const handleSubmit = (formData) => {
+    setUserDetails(formData);
+    console.log("Submitted User Details:", formData);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="app-container">
+      <h1 className="app-title">Marathon Registration Form</h1>
+      <Form onSubmit={handleSubmit} />
+      {userDetails && <Welcome userDetails={userDetails} />}
+      <div className="marathon-details">
+        <h3>Marathon Details:</h3>
+        <p>Date: Next Sunday</p>
+        <p>Venue: Gachibowli, Hyderabad</p>
+        <p>Timings: 10:00 AM</p>
+      </div>
     </div>
   );
-}
+};
 
 export default App;
